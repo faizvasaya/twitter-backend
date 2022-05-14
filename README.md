@@ -2,7 +2,7 @@
 
 Backend APIs for twitter like application created using (NodeJS + TypeSricpt + PostgreSQl)
 
-![NodeJS Workflow](https://github.com/faizvasaya/twitter-backend/actions/workflows/nodejs.yml/badge.svg)
+![NodeJS Workflow](https://github.com/faizvasaya/twitter-backend/actions/workflows/nodejs.yml/badge.svg?branch=main)
 
 ## Description
 
