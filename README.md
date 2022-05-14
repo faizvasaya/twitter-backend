@@ -2,6 +2,8 @@
 
 Backend APIs for twitter like application created using (NodeJS + TypeSricpt + PostgreSQl)
 
+![NodeJS Workflow](https://github.com/faizvasaya/twitter-backend/actions/workflows/nodejs.yml/badge.svg)
+
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
