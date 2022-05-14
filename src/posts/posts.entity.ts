@@ -1,5 +1,5 @@
 import { BaseEntity } from 'src/commons/base.entity';
-import { User } from 'src/users/users.entity';
+import { UserEntity } from 'src/users/users.entity';
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from 'typeorm';
 
 @Entity('posts')
@@ -9,9 +9,9 @@ export class Post extends BaseEntity {
   })
   text: string;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => UserEntity)
   @JoinColumn({ name: 'author_id' })
-  authorId: User;
+  authorId: UserEntity;
 
   @Column('json', { default: [] })
   images: Array<string>;
