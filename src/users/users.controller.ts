@@ -8,7 +8,9 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('users')
 @Controller('users')
 export class UsersController {
   @Get('/@:username')
@@ -34,22 +36,22 @@ export class UsersController {
   }
 
   @Put('/:userid/follow')
-  followUser() {
+  followUser(@Param('userid') userid: string) {
     return `following user`;
   }
 
   @Delete('/:userid/follow')
-  unfollowUser() {
+  unfollowUser(@Param('userid') userid: string) {
     return `Unfolow user`;
   }
 
   @Get('/:userid/followers')
-  getFollowersOfUser() {
+  getFollowersOfUser(@Param('userid') userid: string) {
     return `Get followers for user`;
   }
 
   @Put('/:userid/followees')
-  getFolloweesOfUser() {
+  getFolloweesOfUser(@Param('userid') userid: string) {
     return `Get followees of user`;
   }
 }

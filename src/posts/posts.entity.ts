@@ -1,5 +1,6 @@
 import { BaseEntity } from 'src/commons/base.entity';
-import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
+import { User } from 'src/users/users.entity';
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from 'typeorm';
 
 @Entity('posts')
 export class Post extends BaseEntity {
@@ -7,6 +8,10 @@ export class Post extends BaseEntity {
     length: 240,
   })
   text: string;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'author_id' })
+  authorId: User;
 
   @Column('json', { default: [] })
   images: Array<string>;
