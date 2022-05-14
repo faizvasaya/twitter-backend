@@ -48,7 +48,7 @@ export class UsersController {
     return `Get followers for user`;
   }
 
-  @Get('/:userid/followees')
+  @Put('/:userid/followees')
   getFolloweesOfUser() {
     return `Get followees of user`;
   }
