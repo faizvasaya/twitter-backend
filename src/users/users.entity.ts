@@ -1,6 +1,5 @@
-import { cp } from 'fs';
-import { BaseEntity } from 'src/commons/base.entity';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity } from '../commons/base.entity';
+import { Column, Entity } from 'typeorm';
 
 @Entity('users')
 export class UserEntity extends BaseEntity {
