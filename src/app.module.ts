@@ -7,6 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './users/users.entity';
 import { Post } from './posts/posts.entity';
 import { UsersModule } from './users/users.module';
+import { PostsModule } from './posts/posts.module';
+import { HashtagsModule } from './hashtags/hashtags.module';
 
 @Module({
   imports: [
@@ -20,8 +22,10 @@ import { UsersModule } from './users/users.module';
       entities: [UserEntity, Post],
     }),
     UsersModule,
+    PostsModule,
+    HashtagsModule,
   ],
-  controllers: [AppController, PostsController, HashtagsController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}

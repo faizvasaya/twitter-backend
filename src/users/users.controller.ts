@@ -9,9 +9,38 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiProperty,
+  ApiPropertyOptional,
+  ApiTags,
+} from '@nestjs/swagger';
 import { UserEntity } from './users.entity';
 import { UsersService } from './users.service';
+
+export class UserCreateRequestBody {
+  @ApiProperty()
+  username: string;
+  @ApiProperty()
+  password: string;
+  @ApiPropertyOptional()
+  name?: string;
+  @ApiPropertyOptional()
+  avatar?: string;
+  @ApiPropertyOptional()
+  bio?: string;
+}
+
+export class UserUpdateRequestBody {
+  @ApiProperty()
+  password: string;
+  @ApiPropertyOptional()
+  name?: string;
+  @ApiPropertyOptional()
+  avatar?: string;
+  @ApiPropertyOptional()
+  bio?: string;
+}
 
 @ApiTags('users')
 @Controller('users')
@@ -30,19 +59,36 @@ export class UsersController {
   }
 
   @Get('/:userid')
-  getUserByUserid(@Param('userid') userid: string): string {
-    // TODO
-    return `details of username = ${userid}`;
+  async getUserByUserid(@Param('userid') userid: string): Promise<UserEntity> {
+    const user = await this.userService.getUserByUserid(userid);
+    if (!user) {
+      throw new NotFoundException('The user does not exists');
+    }
+    return user;
   }
 
+  @ApiBody({
+    type: UserCreateRequestBody,
+  })
   @Post('/')
-  createNewUser(@Body() createUser: any): string {
-    return `create users`;
+  async createNewUser(
+    @Body() createUser: UserCreateRequestBody,
+  ): Promise<UserEntity> {
+    const user = await this.userService.createUser(createUser);
+    return user;
   }
 
+  // TODO: Requires authentication
+  @ApiBody({
+    type: UserUpdateRequestBody,
+  })
   @Patch('/:userid')
-  updateUserDetails(@Param('userid') userid: string): string {
-    return `Update user with id ${userid}`;
+  async updateUserDetails(
+    @Param('userid') userid: string,
+    @Body() body: UserUpdateRequestBody,
+  ): Promise<UserEntity> {
+    const user = await this.userService.updateUser(userid, body);
+    return user;
   }
 
   @Put('/:userid/follow')

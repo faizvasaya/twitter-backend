@@ -1,3 +1,4 @@
+import { cp } from 'fs';
 import { BaseEntity } from 'src/commons/base.entity';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -12,8 +13,13 @@ export class UserEntity extends BaseEntity {
 
   @Column({
     length: 50,
+    nullable: true,
   })
   name: string;
+  @Column({
+    nullable: true,
+    length: 240,
+  })
   avatar: string;
 
   @Column({
