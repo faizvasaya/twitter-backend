@@ -74,7 +74,10 @@ export class UsersController {
   async createNewUser(
     @Body() createUser: UserCreateRequestBody,
   ): Promise<UserEntity> {
-    const user = await this.userService.createUser(createUser);
+    const user = await this.userService.createUser(
+      createUser,
+      createUser.password,
+    );
     return user;
   }
 

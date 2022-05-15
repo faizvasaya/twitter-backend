@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { AuthService } from '../auth/auth.service';
 import { UserEntity } from './users.entity';
 import { UsersRepository } from './users.repository';
 
 @Injectable()
 export class UsersService {
-  constructor(private userRepo: UsersRepository) {}
+  constructor(
+    private userRepo: UsersRepository,
+    private authService: AuthService,
+  ) {}
   // TODO: Handle password
   public async getUserByUsername(username: string): Promise<UserEntity> {
     return await this.userRepo.findOne({
@@ -22,7 +26,12 @@ export class UsersService {
     });
   }
 
-  public async createUser(user: Partial<UserEntity>): Promise<UserEntity> {
+  public async createUser(
+    user: Partial<UserEntity>,
+    password: string,
+  ): Promise<UserEntity> {
+    const newUser = await this.userRepo.save(user);
+    await this.authService.createPasswordForNewUser(password, newUser);
     return await this.userRepo.save(user);
   }
 
